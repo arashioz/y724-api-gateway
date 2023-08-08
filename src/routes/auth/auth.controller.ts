@@ -13,15 +13,15 @@ export class AuthController {
   @ApiBody({ type: LoginDto })
   @ApiAcceptedResponse()
   @ApiResponse({ type: LoginDtoRs })
-  signUp(@Body() body: LoginDto): LoginDtoRs {
-    let userData = {  
-      role:"expert",
-      userId:"3812hg31239cs",
-      email: "userData.email",
-      clientKey :"userData.clientKey",
-      token: "userData.token",
-      refreshToken :"userData.refreshToken",
-    }
+  login(@Body() body: LoginDto): LoginDtoRs {
+    let userData = {
+      role: 'expert',
+      userId: '3812hg31239cs',
+      email: 'userData.email',
+      clientKey: 'userData.clientKey',
+      token: 'userData.token',
+      refreshToken: 'userData.refreshToken',
+    };
     return new LoginDtoRs(userData);
   }
 }
