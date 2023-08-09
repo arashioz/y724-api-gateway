@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { RoleEnum } from '../type/role.enum';
 import { IsEmail } from 'class-validator';
+import { RoleEnum } from '../../types/role.enum';
 
 export class LoginDto {
   @ApiProperty({ example:RoleEnum, type: 'array', description: 'LOGIN_DTO' })

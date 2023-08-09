@@ -1,14 +1,30 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+  UseFilters,
+} from '@nestjs/common';
 import {
   ApiAcceptedResponse,
   ApiBody,
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { LoginDto, LoginDtoRs } from './dto/login.dto';
+import { TranslatorService, TranslatorFilter } from 'nestjs-translator';
+import {
+  ForgetPasswordDtoRs,
+  ForgetPasswordSendCodeDto,
+} from './dto/actor-dto/forget-password.dto';
+import { LoginDto, LoginDtoRs } from './dto/actor-dto/login.dto';
 @ApiTags('auth-actor')
 @Controller('auth/actor')
+@UseFilters(TranslatorFilter)
 export class AuthController {
+  // constructor(private translator: TranslatorService) {}
+
   @Post('login')
   @ApiBody({ type: LoginDto })
   @ApiAcceptedResponse()
@@ -39,5 +55,20 @@ export class AuthController {
       refreshToken: 'userData.refreshToken',
     };
     return new LoginDtoRs(userData);
+  }
+  @Post('forget-password')
+  @ApiBody({
+    type: ForgetPasswordSendCodeDto,
+    description: 'send otp when call this api',
+  })
+  @ApiAcceptedResponse()
+  @ApiResponse({ type: ForgetPasswordSendCodeDto })
+  forgetPassword(@Body() body): ForgetPasswordDtoRs {
+    let message = new HttpException('sendOtp', HttpStatus.ACCEPTED);
+    let data = {
+      otp: '23233',
+      phoneNumber: body.phoneNumber,
+    };
+    return new ForgetPasswordDtoRs(data, message.message);
   }
 }
