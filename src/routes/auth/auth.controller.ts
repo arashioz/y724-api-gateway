@@ -13,7 +13,6 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-<<<<<<< HEAD
 import { TranslatorService, TranslatorFilter } from 'nestjs-translator';
 import {
   ForgetPasswordDtoRs,
@@ -21,10 +20,6 @@ import {
 } from './dto/actor-dto/forget-password.dto';
 import { LoginDto, LoginDtoRs } from './dto/actor-dto/login.dto';
 import { registerDto, registerDtoRs } from './dto/actor-dto/register.dto';
-=======
-import { LoginDto, LoginDtoRs } from './dto/login.dto';
-import { registerDto, registerDtoRs } from './dto/register.dto';
->>>>>>> 8ba63de5d075807684b97eaefcd4405460cc2e06
 @ApiTags('auth-actor')
 @Controller('auth/actor')
 @UseFilters(TranslatorFilter)
