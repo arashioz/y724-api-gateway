@@ -6,6 +6,7 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { LoginDto, LoginDtoRs } from './dto/login.dto';
+import { registerDto, registerDtoRs } from './dto/register.dto';
 @ApiTags('auth-actor')
 @Controller('auth/actor')
 export class AuthController {
@@ -26,18 +27,11 @@ export class AuthController {
   }
 
   @Post('register')
-  @ApiBody({ type: LoginDto })
+  @ApiBody({ type: registerDto })
   @ApiAcceptedResponse()
-  @ApiResponse({ type: LoginDtoRs })
+  @ApiResponse({ type: registerDtoRs })
   register(@Body() body: LoginDto): LoginDtoRs {
-    let userData = {
-      role: 'expert',
-      userId: '3812hg31239cs',
-      email: 'userData.email',
-      clientKey: 'userData.clientKey',
-      token: 'userData.token',
-      refreshToken: 'userData.refreshToken',
-    };
-    return new LoginDtoRs(userData);
+    let registerData = 'ثبت نام با موفقیت انجام شد.';
+    return new LoginDtoRs(registerData);
   }
 }
