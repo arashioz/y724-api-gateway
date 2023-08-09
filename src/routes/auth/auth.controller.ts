@@ -13,12 +13,18 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+<<<<<<< HEAD
 import { TranslatorService, TranslatorFilter } from 'nestjs-translator';
 import {
   ForgetPasswordDtoRs,
   ForgetPasswordSendCodeDto,
 } from './dto/actor-dto/forget-password.dto';
 import { LoginDto, LoginDtoRs } from './dto/actor-dto/login.dto';
+import { registerDto, registerDtoRs } from './dto/actor-dto/register.dto';
+=======
+import { LoginDto, LoginDtoRs } from './dto/login.dto';
+import { registerDto, registerDtoRs } from './dto/register.dto';
+>>>>>>> 8ba63de5d075807684b97eaefcd4405460cc2e06
 @ApiTags('auth-actor')
 @Controller('auth/actor')
 @UseFilters(TranslatorFilter)
@@ -42,19 +48,12 @@ export class AuthController {
   }
 
   @Post('register')
-  @ApiBody({ type: LoginDto })
+  @ApiBody({ type: registerDto })
   @ApiAcceptedResponse()
-  @ApiResponse({ type: LoginDtoRs })
+  @ApiResponse({ type: registerDtoRs })
   register(@Body() body: LoginDto): LoginDtoRs {
-    let userData = {
-      role: 'expert',
-      userId: '3812hg31239cs',
-      email: 'userData.email',
-      clientKey: 'userData.clientKey',
-      token: 'userData.token',
-      refreshToken: 'userData.refreshToken',
-    };
-    return new LoginDtoRs(userData);
+    let registerData = 'ثبت نام با موفقیت انجام شد.';
+    return new LoginDtoRs(registerData);
   }
   @Post('forget-password')
   @ApiBody({
