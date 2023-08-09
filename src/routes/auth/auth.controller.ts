@@ -15,8 +15,8 @@ import {
 } from '@nestjs/swagger';
 import { TranslatorService, TranslatorFilter } from 'nestjs-translator';
 import {
-  ForgetPasswordDtoRs,
   ForgetPasswordSendCodeDto,
+  ForgetPasswordVerifyCodeDto,
 } from './dto/actor-dto/forget-password.dto';
 import { LoginDto, LoginDtoRs } from './dto/actor-dto/login.dto';
 import { registerDto, registerDtoRs } from './dto/actor-dto/register.dto';
@@ -24,7 +24,7 @@ import { registerDto, registerDtoRs } from './dto/actor-dto/register.dto';
 @Controller('auth/actor')
 @UseFilters(TranslatorFilter)
 export class AuthController {
-  // constructor(private translator: TranslatorService) {}
+  constructor(private translator: TranslatorService) {}
 
   @Post('login')
   @ApiBody({ type: LoginDto })
@@ -57,12 +57,23 @@ export class AuthController {
   })
   @ApiAcceptedResponse()
   @ApiResponse({ type: ForgetPasswordSendCodeDto })
-  forgetPassword(@Body() body): ForgetPasswordDtoRs {
-    let message = new HttpException('sendOtp', HttpStatus.ACCEPTED);
-    let data = {
-      otp: '23233',
-      phoneNumber: body.phoneNumber,
-    };
-    return new ForgetPasswordDtoRs(data, message.message);
+  forgetPassword(@Body() body) {
+    throw new HttpException('send_otp', HttpStatus.ACCEPTED);
+  }
+  @Post('forget-password-verify')
+  @ApiBody({
+    type: ForgetPasswordVerifyCodeDto,
+    description: 'send otp when call this api',
+  })
+  @ApiAcceptedResponse()
+  @ApiResponse({ type: ForgetPasswordVerifyCodeDto })
+  forgetPasswordVerify(@Body() body: ForgetPasswordVerifyCodeDto) {
+    if(body.phoneNumber !== "09331009989"){
+      throw new HttpException('notfound_phone', HttpStatus.NOT_FOUND);
+
+    }
+    if (body.otp === '22222') {
+      throw new HttpException('change_password', HttpStatus.ACCEPTED);
+    }else throw new HttpException("wrong_otp" , HttpStatus.BAD_REQUEST)
   }
 }
