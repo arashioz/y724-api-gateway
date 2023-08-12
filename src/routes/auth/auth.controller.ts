@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Header,
   HttpException,
   HttpStatus,
   Post,
@@ -29,6 +30,7 @@ export class AuthController {
   @Post('login')
   @ApiBody({ type: LoginDto })
   @ApiAcceptedResponse()
+  @Header('Access-Control-Allow-Origin', '*')
   @ApiResponse({ type: LoginDtoRs })
   login(@Body() body: LoginDto): LoginDtoRs {
     let userData = {
