@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Header,
   HttpException,
   HttpStatus,
   Post,
@@ -32,6 +33,7 @@ export class AuthController {
   @Post('/actor/login')
   @ApiBody({ type: LoginDto })
   @ApiAcceptedResponse()
+  @Header('Access-Control-Allow-Origin', '*')
   @ApiResponse({ type: LoginDtoRs })
   login(@Body() body: LoginDto): LoginDtoRs {
     let userData = {
@@ -41,7 +43,7 @@ export class AuthController {
       clientKey: 'userData.clientKey',
       token: 'userData.token',
       refreshToken: 'userData.refreshToken',
-    };
+    }; console.log('asihdashdkajsdlk')
     return new LoginDtoRs(userData);
   }
   @ApiTags('auth-actor')
