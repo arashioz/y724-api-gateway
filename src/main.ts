@@ -2,17 +2,18 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { I18nValidationPipe, i18nValidationErrorFactory } from 'nestjs-i18n';
+import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors({
-    origin: 'http://82.99.202.245:3097',
+  const corsOptions: CorsOptions = {
+    origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Content-Type, Accept',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  });
-
+    allowedHeaders: 'Origin,Accept,Content-Type,Authorization',
+    credentials: true,
+  };
+  
+  app.enableCors(corsOptions);
   app.useGlobalPipes(new I18nValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('yara724-backend')
