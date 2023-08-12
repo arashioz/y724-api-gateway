@@ -38,7 +38,7 @@ export class AuthController {
       clientKey: 'userData.clientKey',
       token: 'userData.token',
       refreshToken: 'userData.refreshToken',
-    };
+    }; console.log('asihdashdkajsdlk')
     return new LoginDtoRs(userData);
   }
 
