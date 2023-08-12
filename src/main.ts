@@ -5,7 +5,7 @@ import { I18nValidationPipe, i18nValidationErrorFactory } from 'nestjs-i18n';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: false });
   await app.enableCors({
     origin: '*',
     methods: 'POST,GET,PATCH,DELETE,PUT',
