@@ -6,7 +6,7 @@ import { I18nValidationPipe, i18nValidationErrorFactory } from 'nestjs-i18n';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: '*', // Replace with your client's domain
+    origin: 'http://82.99.202.245:3097',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept',
     preflightContinue: false,
