@@ -4,11 +4,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { I18nValidationPipe, i18nValidationErrorFactory } from 'nestjs-i18n';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
-  app.useGlobalPipes(
-    new I18nValidationPipe(),
-  );
+  const app = await NestFactory.create(AppModule, { cors: true });
+  app.useGlobalPipes(new I18nValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('yara724-backend')
     .setVersion('1.0.0')
