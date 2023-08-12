@@ -6,14 +6,12 @@ import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.int
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const corsOptions: CorsOptions = {
-    origin: true,
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Origin,Accept,Content-Type,Authorization',
+  await app.enableCors({
+    origin: '*',
+    methods: 'POST,GET,PATCH,DELETE,PUT',
     credentials: true,
-  };
-  
-  app.enableCors(corsOptions);
+  });
+
   app.useGlobalPipes(new I18nValidationPipe());
   const config = new DocumentBuilder()
     .setTitle('yara724-backend')
