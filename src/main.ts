@@ -6,7 +6,7 @@ import { I18nValidationPipe, i18nValidationErrorFactory } from 'nestjs-i18n';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   await app.enableCors({
-    origin: 'localhost',
+    origin: 'http://localhost:5173',
     methods: 'POST,GET,PATCH,DELETE,PUT',
     credentials: true,
   });
